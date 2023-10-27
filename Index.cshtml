@@ -1,0 +1,76 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    Layout = "";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<title>Infinite Quote Guesser</title>
+
+<div class="row mb-5"></div>
+<div class="text-center">
+    <h1 style="font-family: 'Times New Roman', Times, serif;" class="display-4">Infinite Quote Guesser</h1>
+    <p>Can you guess who said the following quote?</p>
+</div>
+
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8 text-center">
+        <h2 style="font-family: 'Times New Roman', Times, serif">@Model.getDisplay()</h2>
+    </div>
+    <div class="col-2"></div>
+</div>
+
+<div class="col-xs-1 text-center">
+    <form method="post" runat="server">
+        <label for="selectOptions">Select an option: </label>
+        <select id="selectOptions" name="selectOptions" size="4" class="form-select form-select-lg">
+            <option value="Guess0">
+                @Model.getAuthorZero()
+            </option>
+            <option value="Guess1">
+                @Model.getAuthorOne()
+            </option>
+            <option value="Guess2">
+                @Model.getAuthorTwo()
+            </option>
+            <option value="Guess3">
+                @Model.getAuthorThree()
+            </option>
+        </select>
+        <div class="row mb-2"></div>
+        <input type="submit" class="btn btn-dark" value="Guess?" />
+    </form>
+</div>
+
+<div class="row mb-2">
+    <div class="col-4 text-center">
+        <h3 style="font-family: 'Times New Roman', Times, serif">Current streak: @Model.getCurrentStreak()</h3>
+    </div>
+    <div class="col-4 text-center">
+        <h3 style="font-family: 'Times New Roman', Times, serif">@Model.getRightWrong()</h3>
+    </div>
+    <div class="col-4 text-center">
+        <h3 style="font-family: 'Times New Roman', Times, serif">Best streak: @Model.getBestStreak()</h3>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-4 text-center">
+    </div>
+    <div class="col-4 text-center">
+        @{
+            string prevAns = Model.getPrevAnswer();
+            if (prevAns.Length > 1)
+                {
+        <h3 style="font-family: 'Times New Roman', Times, serif">Previous answer: @prevAns</h3>
+                }
+            }
+    </div>
+    <div class="col-4 text-center">
+    </div>
+</div>
+
+
